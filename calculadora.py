@@ -27,6 +27,12 @@ def main():
     elif operacao == '2':
         print("Result:", subtraction(num1, num2))
 
+    elif operacao == '3':
+        print("Result:", multiplication(num1, num2))
+
+    elif operacao == '4':
+        print("Result:", division(num1, num2))
+        
     else:
         print("Invalid")
 
