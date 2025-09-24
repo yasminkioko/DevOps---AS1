@@ -18,13 +18,34 @@ jobs:
           path: |
             '**.py'
             README.md
+  test-job:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 calculadora.py
 
   deploy:
     runs-on: ubuntu-latest
-    needs: deliver
+    needs: test-job
     steps:
       - uses: actions/download-artifact@v4
         with:
           name: projetozipado.zip
       - name: Display Structure of downloaded files
         run: ls -R
+
+name: Discord Webhook
+
+on: [push]
+
+jobs:
+  git:
+    runs-on: ubuntu-latest
+    steps:
+
+    - uses: actions/checkout@v4
+
+    - name: Run Discord Webhook
+      uses: johnnyhuy/actions-discord-git-webhook@main
+      with:
+        webhook_url: ${{ secrets.YOUR_DISCORD_WEBHOOK_URL }}
